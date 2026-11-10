@@ -97,7 +97,8 @@ export function hipRoofTileMatrices(
 
   for (const p of planes) {
     const yaw = new THREE.Matrix4().makeRotationY(p.angle);
-    const pitchM = new THREE.Matrix4().makeRotationX(-spec.pitch);
+    // Rotating +pitch about X turns local Z into the down-slope direction and Y into the normal.
+    const pitchM = new THREE.Matrix4().makeRotationX(spec.pitch);
     const frame = new THREE.Matrix4()
       .makeTranslation(p.origin.x, p.origin.y, p.origin.z)
       .multiply(yaw)
