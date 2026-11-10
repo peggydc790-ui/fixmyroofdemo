@@ -10,11 +10,11 @@ import posterImg from "@/assets/intro-home.jpg";
 const HouseScene = lazy(() => import("./HouseScene"));
 
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
+  override state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
   }
-  render() {
+  override render() {
     return this.state.failed ? null : this.props.children;
   }
 }
@@ -45,7 +45,7 @@ export function Hero() {
     });
     const el = sectionRef.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setActive(e.isIntersecting), { threshold: 0 });
+    const io = new IntersectionObserver(([e]) => setActive(e?.isIntersecting ?? true), { threshold: 0 });
     io.observe(el);
     return () => io.disconnect();
   }, []);

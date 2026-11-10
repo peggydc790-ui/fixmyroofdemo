@@ -461,8 +461,8 @@ function Neighbourhood() {
       const w = 8 + rnd() * 4;
       list.push({
         x, z, w, d: w * (0.62 + rnd() * 0.2), h: 2.8 + rnd() * 2.6,
-        roof: ["#3b3d40", "#5a4034", "#4b4e52", "#2f3134"][Math.floor(rnd() * 4)],
-        wall: ["#d8d0c3", "#c9c2b6", "#e6e0d6"][Math.floor(rnd() * 3)],
+        roof: ["#3b3d40", "#5a4034", "#4b4e52", "#2f3134"][Math.floor(rnd() * 4)] ?? "#3b3d40",
+        wall: ["#d8d0c3", "#c9c2b6", "#e6e0d6"][Math.floor(rnd() * 3)] ?? "#d8d0c3",
         rot: (rnd() - 0.5) * 0.3,
       });
     }
