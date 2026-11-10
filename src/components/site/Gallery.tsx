@@ -24,6 +24,7 @@ const ITEMS: Item[] = [
 
 export function Gallery() {
   const [open, setOpen] = useState<number | null>(null);
+  const current = open === null ? undefined : ITEMS[open];
 
   useEffect(() => {
     if (open === null) return;
@@ -99,11 +100,11 @@ export function Gallery() {
       </div>
 
       <AnimatePresence>
-        {open !== null && (
+        {open !== null && current && (
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={ITEMS[open].title}
+            aria-label={current.title}
             className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/90 p-4 backdrop-blur-xl sm:p-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -112,14 +113,14 @@ export function Gallery() {
           >
             <motion.img
               layoutId={`g-${open}`}
-              src={ITEMS[open].src}
-              alt={`${ITEMS[open].title} (illustrative)`}
+              src={current.src}
+              alt={`${current.title} (illustrative)`}
               className="max-h-[80svh] w-auto max-w-full rounded-2xl object-contain shadow-elegant"
               onClick={(e) => e.stopPropagation()}
             />
             <div className="absolute inset-x-0 bottom-6 text-center">
-              <p className="eyebrow text-copper">{ITEMS[open].tag}</p>
-              <p className="mt-1 font-display text-lg">{ITEMS[open].title} · Illustrative</p>
+              <p className="eyebrow text-copper">{current.tag}</p>
+              <p className="mt-1 font-display text-lg">{current.title} · Illustrative</p>
             </div>
             <button
               type="button"
